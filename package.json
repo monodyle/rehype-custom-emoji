@@ -1,0 +1,60 @@
+{
+  "name": "rehype-custom-emoji",
+  "version": "1.0.0",
+  "description": "rehype plugin to create custom emoji",
+  "author": "Monody Le <monodyle.1999@gmail.com>",
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepack": "npm run build",
+    "start": "node lib/index.js",
+    "watch": "tsbb watch --disable-babel",
+    "build": "tsbb build --disable-babel && npm run esm-fix",
+    "esm-fix": "tsc-esm-fix --target='lib' --ext='.js'",
+    "type-check": "tsc --noEmit",
+    "test": "tsbb test",
+    "coverage": "tsbb test --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monodyle/rehype-custom-emoji"
+  },
+  "files": [
+    "src",
+    "lib"
+  ],
+  "keywords": [
+    "rehype-custom-emoji",
+    "rehype",
+    "emoji",
+    "markdown",
+    "unified",
+    "javascript",
+    "typescript"
+  ],
+  "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/?!(.*)"
+    ]
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "dependencies": {
+    "hast": "^1.0.0",
+    "hast-util-find-and-replace": "4.0.0",
+    "unified": "10.1.1"
+  },
+  "devDependencies": {
+    "rehype": "12.0.0",
+    "rehype-raw": "6.1.0",
+    "rehype-stringify": "9.0.2",
+    "remark-gfm": "3.0.1",
+    "remark-parse": "10.0.1",
+    "remark-rehype": "10.1.0",
+    "tsbb": "3.5.2",
+    "tsc-esm-fix": "2.7.5"
+  }
+}
