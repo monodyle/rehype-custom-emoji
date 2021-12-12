@@ -1,7 +1,5 @@
 # rehype-custom-emoji
 
-[![Build](https://github.com/jaywcjlove/rehype-attr/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/rehype-attr/actions/workflows/ci.yml)
-
 [rehype] plugin to create custom emoji
 
 [rehype]: https://github.com/wooorm/rehype
