@@ -45,7 +45,8 @@
   "dependencies": {
     "hast": "^1.0.0",
     "hast-util-find-and-replace": "4.0.0",
-    "unified": "10.1.1"
+    "unified": "10.1.1",
+    "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
     "rehype": "12.0.0",

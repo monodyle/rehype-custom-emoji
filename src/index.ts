@@ -2,15 +2,18 @@ import { Root } from "hast";
 import { h } from "hastscript";
 import { Plugin } from "unified";
 import { findAndReplace } from "hast-util-find-and-replace";
+import { visit } from "unist-util-visit";
 
 export type RehypeEmojiOptions = {
   emojis: Record<string, string>;
   className?: string;
+  ignore?: string | string[];
 };
 
 const defaultOptions: RehypeEmojiOptions = {
   emojis: {},
   className: "emoji",
+  ignore: "code"
 };
 
 const rehypeCustomEmoji: Plugin<[RehypeEmojiOptions?], Root> = (
@@ -26,7 +29,12 @@ const rehypeCustomEmoji: Plugin<[RehypeEmojiOptions?], Root> = (
   });
 
   return (tree) => {
-    findAndReplace(tree, replace_maps, { ignore: "code" });
+    visit(tree, "element", (node) => {
+      if (node.properties.dataEmoji === undefined && node.tagName !== "p") {
+        return
+      }
+      findAndReplace(node, replace_maps, { ignore: opts.ignore });
+    })
   };
 };
 
