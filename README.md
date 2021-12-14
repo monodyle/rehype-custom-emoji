@@ -20,7 +20,7 @@ npm install rehype-custom-emoji
 
 ### options
 
-#### options.emojis
+#### `options.emojis`
 
 Type: `Record<string, string>`. Default value: `{}`.
 
@@ -34,11 +34,17 @@ Example:
 }
 ```
 
-#### options.className
+#### `options.className`
 
 Type: `string`. Default value: `emoji`.
 
 The class name of image after rendered.
+
+#### `options.ignore`
+
+Type: `string` or `string[]`. Default value: `code`
+
+Ignore tag(s) that contain emoji pattern.
 
 ## Usage
 
