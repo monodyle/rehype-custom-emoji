@@ -22,7 +22,7 @@ npm install rehype-custom-emoji
 
 #### `options.emojis`
 
-Type: `Record<string, string>`. Default value: `{}`.
+Type: `Record<string, string>`. Default value: `{}`
 
 The object have key is an emoji code and value is the path of emoji (url).
 
@@ -36,7 +36,7 @@ Example:
 
 #### `options.className`
 
-Type: `string`. Default value: `emoji`.
+Type: `string`. Default value: `emoji`
 
 The class name of image after rendered.
 
@@ -45,6 +45,12 @@ The class name of image after rendered.
 Type: `string` or `string[]`. Default value: `code`
 
 Ignore tag(s) that contain emoji pattern.
+
+#### `options.alt`
+
+Type: `boolean`. Default value: `true`
+
+Add emoji code to alt property in `img` tag.
 
 ## Usage
 

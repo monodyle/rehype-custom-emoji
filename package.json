@@ -1,6 +1,6 @@
 {
   "name": "rehype-custom-emoji",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rehype plugin to create custom emoji",
   "author": "Monody Le <monodyle.1999@gmail.com>",
   "license": "MIT",
