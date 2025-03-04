@@ -1,46 +1,53 @@
-import { Root } from "hast";
-import { h } from "hastscript";
-import { Plugin } from "unified";
+import type { Root } from "hast";
 import { findAndReplace } from "hast-util-find-and-replace";
-import { visit } from "unist-util-visit";
 
-export type RehypeEmojiOptions = {
-  emojis: Record<string, string>;
-  className?: string;
-  ignore?: string | string[];
-  alt?: boolean;
+function defaultBuild(src: string, value: string) {
+	return {
+		type: "element",
+		tagName: "img",
+		properties: {
+			className: ["emoji"],
+			title: value,
+			alt: value,
+			src,
+			height: 20,
+			width: 20,
+			align: "absmiddle",
+		},
+		children: [],
+	};
+}
+
+const defaultIgnore = ["pre", "code", "tt"];
+
+const emojiRegex = /:(\+1|[-\w]+):/g;
+
+export type RehypeCustomEmojiOptions = {
+	emojis?: Record<string, string>;
+	ignore?: Array<string>;
+	build?: (src: string, value: string) => Element | string;
 };
 
-const defaultOptions: RehypeEmojiOptions = {
-  emojis: {},
-  className: "emoji",
-  ignore: "code",
-  alt: true,
-};
+export default function rehypeCustomEmoji(options: RehypeCustomEmojiOptions) {
+	const config = options || {};
+	const ignore = config.ignore || defaultIgnore;
+	const build = config.build || defaultBuild;
+	const emojis = config.emojis || {};
 
-const rehypeCustomEmoji: Plugin<[RehypeEmojiOptions?], Root> = (
-  options: RehypeEmojiOptions
-) => {
-  const opts = { ...defaultOptions, ...options };
-  const replace_maps: Record<string, any> = {};
-  Object.entries(opts.emojis).forEach(([emoji_code, path]) => {
-    const emoji = `:${emoji_code}:`;
-    const properties = {
-      src: path,
-      className: opts.className,
-      alt: opts.alt ? emoji : undefined,
-    };
-    replace_maps[emoji] = h("img", properties);
-  });
-
-  return (tree) => {
-    visit(tree, "element", (node) => {
-      if (node.properties?.dataEmoji === undefined && node.tagName !== "p") {
-        return;
-      }
-      findAndReplace(node, replace_maps, { ignore: opts.ignore });
-    });
-  };
-};
-
-export default rehypeCustomEmoji;
+	return (tree: Root) => {
+		findAndReplace(
+			tree,
+			[
+				[
+					emojiRegex,
+					function replaceGemoji($0, $1) {
+						if (emojis[$1]) {
+							return build(emojis[$1], $0) as string;
+						}
+					},
+				],
+			],
+			{ ignore },
+		);
+	};
+}
