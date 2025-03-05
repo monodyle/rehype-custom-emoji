@@ -33,7 +33,6 @@ const htmlStr = rehype()
       hello: "/emoji/hello.png",
       wave: "https://example.com/wave.gif"
     },
-    className: "custom-emoji"
   })
   .processSync(`
     # Welcome! :hello:
@@ -46,8 +45,8 @@ const htmlStr = rehype()
 This will transform the emoji codes (`:hello:` and `:wave:`) into image elements:
 
 ```html
-<h1>Welcome! <img src="/emoji/hello.png" alt="hello" class="custom-emoji"></h1>
-<p>Hey there! <img src="https://example.com/wave.gif" alt="wave" class="custom-emoji"></p>
+<h1>Welcome! <img src="/emoji/hello.png" alt="hello" class="emoji"></h1>
+<p>Hey there! <img src="https://example.com/wave.gif" alt="wave" class="emoji"></p>
 ```
 
 ## API
