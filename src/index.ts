@@ -19,7 +19,6 @@ function defaultBuild(src: string, value: string) {
 }
 
 const defaultIgnore = ["pre", "code", "tt"];
-
 const emojiRegex = /:(\+1|[-\w]+):/g;
 
 export type RehypeCustomEmojiOptions = {
@@ -40,7 +39,7 @@ export default function rehypeCustomEmoji(options: RehypeCustomEmojiOptions) {
 			[
 				[
 					emojiRegex,
-					function replaceGemoji($0, $1) {
+					function replaceEmoji($0, $1) {
 						if (emojis[$1]) {
 							return build(emojis[$1], $0) as string;
 						}
